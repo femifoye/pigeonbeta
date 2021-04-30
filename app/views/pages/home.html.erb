@@ -1,0 +1,36 @@
+<div id="pb__home">
+    <h1 class="text-center">Welcome to Pigeon Beta</h1>
+    <div class="pb__home__cart">
+            <h2> You have <%= @cartItems == nil ? "0" : @cartItems.length %> Items in your cart.</h2>
+            <h2><%= link_to "Empty Cart", empty_cart_path(:cart_id => @cart.id) %></h2>
+    </div>
+    <h2 class="text-center">Select Your Items</h2>
+    <!-- Render all items -->
+    <div class="pb__items">
+         <% @items.each do | item | %>
+            <div class="pb__item">
+                <div class="pb__item__img">
+                    <img src="https://place-hold.it/200" alt="<%= item.name %>"/>
+                </div>
+                <div class="pb__item__name">
+                    <h3><%= item.name %></h3>
+                </div>
+                <div class="pb__item__price">
+                    <h3><% item.price %></h3>
+                </div>
+                <div class="pb__item__add">
+                <!--- <%= link_to  "Add To Cart", new_cart_item_path(@cart) %> --->
+                <%= form_with url: cart_items_path, local: true, method: :post do %>
+                        <%= hidden_field_tag 'item_id', item.id %>
+                        <%= hidden_field_tag 'cart_id', @cart.id %>
+                        <%= submit_tag "Add To Cart", :class => "pb__item__button" %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+   
+    <% if @cartItems.length > 0 %>
+        <h2><%= link_to "Proceed To Checkout", checkout_path(:cart_id => @cart.id, :user_id => @user.id) %></h2>
+    <% end %>
+</div>

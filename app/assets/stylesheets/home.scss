@@ -1,0 +1,29 @@
+#pb__home {
+  width: fit-content;
+  width: -moz-fit-content;
+  margin: 100px auto;
+
+  h1,
+  h2,
+  h3 {
+    text-align: center;
+  }
+}
+
+.pb__home__cart {
+  display: flex;
+  width: 450px;
+  justify-content: space-around;
+  margin: 0 auto;
+}
+
+.pb__items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+}
+
+.pb__item__button {
+  display: flex;
+  margin: 0 auto;
+}
